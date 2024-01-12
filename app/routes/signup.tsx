@@ -5,7 +5,7 @@ import {Label} from '~/components/ui/label'
 
 export default function Signup() {
   return (
-    <div className="flex min-h-full flex-1 flex-col mt-20 sm:px-6 lg:px-8 bg-muted">
+    <div className="flex min-h-full flex-1 flex-col mt-20 sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2
           id="signup-header"
