@@ -1,14 +1,10 @@
-import type {LinksFunction, MetaFunction} from '@remix-run/node'
+import type {MetaFunction} from '@remix-run/node'
 
 export const meta: MetaFunction = () => {
   return [
     {title: 'New Remix App'},
     {name: 'description', content: 'Welcome to Remix!'},
   ]
-}
-
-export const links: LinksFunction = () => {
-  return [{rel: 'stylesheet', href: '/app/styles/tailwind.css'}]
 }
 
 export default function Index() {
