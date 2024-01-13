@@ -1,4 +1,4 @@
-import {createCookie} from '@remix-run/node'
+import {createCookie, redirect} from '@remix-run/node'
 
 let secret = process.env.COOKIE_SECRET || 'default'
 
@@ -16,14 +16,18 @@ export const authCookie = createCookie('auth', {
   maxAge: 60 * 60 * 24 * 30, // 30 days
 })
 
-export async function createAccount(email: string, password: string) {
-  console.log(
-    '🚀 ~ file: auth.ts ~ line 7 ~ createAccount ~ email, password',
-    email,
-    password
-  )
+export async function requireAuthCookie(request: Request) {
+  const userId = await authCookie.parse(request.headers.get('Cookie'))
 
-  return {
-    id: 1,
+  if (!userId) {
+    throw redirect('/login', {
+      headers: {
+        'Set-Cookie': await authCookie.serialize('', {
+          maxAge: 0,
+        }),
+      },
+    })
   }
+
+  return userId
 }
