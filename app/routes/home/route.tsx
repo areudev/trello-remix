@@ -2,6 +2,7 @@ import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   MetaFunction,
+  redirect,
 } from '@remix-run/node'
 import {createBoard, getHomeData} from './queries'
 import {requireAuthCookie} from '~/auth/auth'
@@ -31,7 +32,7 @@ export async function action({request}: ActionFunctionArgs) {
   const board = await createBoard(userId, name, color)
   console.log('board', board)
 
-  return {ok: true}
+  return redirect(`/board/${board.id}`)
 }
 
 export default function Home() {
