@@ -6,7 +6,7 @@ import {
 } from '@remix-run/node'
 import {createBoard, getHomeData} from './queries'
 import {requireAuthCookie} from '~/auth/auth'
-import {Form, Link, useLoaderData} from '@remix-run/react'
+import {Form, Link, useLoaderData, useNavigation} from '@remix-run/react'
 import {Input} from '~/components/ui/input'
 import {Label} from '~/components/ui/label'
 import {Button} from '~/components/ui/button'
@@ -38,7 +38,6 @@ export async function action({request}: ActionFunctionArgs) {
 export default function Home() {
   return (
     <div>
-      <h2>Home Yo</h2>
       <NewBoard />
       <Boards />
     </div>
@@ -75,9 +74,11 @@ function Board({name, id, color}: {name: string; id: number; color: string}) {
 }
 
 function NewBoard() {
+  const navigation = useNavigation()
+  const isCreating = navigation.formData?.get('intent') === 'createBoard'
   return (
     <Form method="post" className="p-8 max-w-md">
-      {/* <input type="hidden" name="intent" value="createBoard" /> */}
+      <input type="hidden" name="intent" value="createBoard" />
       <div>
         <h2 className="font-bold mb-2 text-xl">New Board</h2>
         <div>
@@ -97,7 +98,10 @@ function NewBoard() {
             className="bg-transparent"
           />
         </div>
-        <Button type="submit">Create</Button>
+        <Button type="submit">
+          {/* {navigation.formAction === '/home' ? 'Creating...' : 'Create'} */}
+          {isCreating ? 'Creating...' : 'Create'}
+        </Button>
       </div>
     </Form>
   )
