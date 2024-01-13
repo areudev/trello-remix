@@ -1,4 +1,6 @@
-export function validate(email: string, password: string) {
+import {accountExists} from './queries'
+
+export async function validate(email: string, password: string) {
   const errors: {email?: string; password?: string} = {}
 
   if (!email) {
@@ -7,6 +9,9 @@ export function validate(email: string, password: string) {
     errors['email'] = 'Email is invalid'
   }
 
+  if (await accountExists(email)) {
+    errors.email = 'Email is already taken'
+  }
   if (!password) {
     errors['password'] = 'Password is required'
   } else if (password.length < 5) {

@@ -4,7 +4,8 @@ import {Button} from '~/components/ui/button'
 import {Input} from '~/components/ui/input'
 import {Label} from '~/components/ui/label'
 import {validate} from './validate'
-import {authCookie, createAccount} from '~/auth/auth'
+import {authCookie} from '~/auth/auth'
+import {createAccount} from './queries'
 
 export const meta = () => {
   return [
@@ -19,7 +20,7 @@ export async function action({request}: ActionFunctionArgs) {
   const email = String(formData.get('email'))
   const password = String(formData.get('password'))
 
-  const errors = validate(email, password)
+  const errors = await validate(email, password)
   if (errors) {
     return {
       errors,
