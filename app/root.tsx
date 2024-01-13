@@ -1,4 +1,4 @@
-import {type LinksFunction} from '@remix-run/node'
+import {LoaderFunctionArgs, type LinksFunction} from '@remix-run/node'
 import {
   Link,
   Links,
@@ -7,16 +7,25 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from '@remix-run/react'
 import {LoginIcon, LogoutIcon} from './icons/icons'
+import {authCookie} from './auth/auth'
 
 export const links: LinksFunction = () => {
   return [{rel: 'stylesheet', href: '/app/styles/tailwind.css'}]
 }
 
-const userId = null
+export async function loader({request}: LoaderFunctionArgs) {
+  const cookieString = request.headers.get('Cookie')
+  const userId = await authCookie.parse(cookieString)
+  return {userId}
+}
 
 export default function App() {
+  const {userId} = useLoaderData<typeof loader>()
+  console.log('userId', userId)
+
   return (
     <html lang="en">
       <head>
