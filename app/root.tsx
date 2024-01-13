@@ -14,7 +14,7 @@ export const links: LinksFunction = () => {
   return [{rel: 'stylesheet', href: '/app/styles/tailwind.css'}]
 }
 
-const userId = '123'
+const userId = null
 
 export default function App() {
   return (

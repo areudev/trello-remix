@@ -25,7 +25,7 @@ export function Icon({
 
 export function LoginIcon() {
   return (
-    <svg className="inline self-center w-8 h-8 text-white transform scale-x-[-1]">
+    <svg className="inline self-center w-8 h-8  transform scale-x-[-1]">
       <use href={`${iconsHref}#login`} />
     </svg>
   )
