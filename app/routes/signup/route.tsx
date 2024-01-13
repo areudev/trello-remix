@@ -3,6 +3,7 @@ import {Form, Link, useActionData} from '@remix-run/react'
 import {Button} from '~/components/ui/button'
 import {Input} from '~/components/ui/input'
 import {Label} from '~/components/ui/label'
+import {validate} from './validate'
 
 export const meta = () => {
   return [
@@ -17,32 +18,9 @@ export async function action({request}: ActionFunctionArgs) {
   const email = String(formData.get('email'))
   const password = String(formData.get('password'))
 
-  const errors: {email?: string; password?: string} = {}
+  const errors = validate(email, password)
 
-  if (!email) {
-    errors['email'] = 'Email is required'
-  } else if (!email.includes('@')) {
-    errors['email'] = 'Email is invalid'
-  }
-
-  if (!password) {
-    errors['password'] = 'Password is required'
-  } else if (password.length < 5) {
-    errors['password'] = 'Password is too short'
-  }
-
-  const hasErrors = Object.keys(errors).length > 0
-
-  if (hasErrors) {
-    return new Response(JSON.stringify({errors}), {
-      status: 422,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }
-
-  return null
+  return {errors}
 }
 
 export default function Signup() {
