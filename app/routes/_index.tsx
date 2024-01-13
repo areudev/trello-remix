@@ -1,11 +1,21 @@
-import type {MetaFunction} from '@remix-run/node'
-import {Link} from '@remix-run/react'
+import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
+import {Link, redirect} from '@remix-run/react'
+import {authCookie} from '~/auth/auth'
 
 export const meta: MetaFunction = () => {
   return [
     {title: 'New Remix App'},
     {name: 'description', content: 'Welcome to Remix!'},
   ]
+}
+
+export async function loader({request}: LoaderFunctionArgs) {
+  const cookieString = request.headers.get('Cookie')
+  const userId = await authCookie.parse(cookieString)
+
+  if (userId) throw redirect('/home')
+
+  return null
 }
 
 export default function Index() {
