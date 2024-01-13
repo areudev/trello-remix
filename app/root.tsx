@@ -25,9 +25,9 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="dark">
+      <body className="">
         <div className="h-full flex flex-col min-h-0">
-          <div className="bg-slate-900 border-b border-slate-800 flex items-center justify-between py-4 px-8 box-border">
+          <div className="bg-muted border-b border-border-800 flex items-center justify-between py-4 px-8 box-border">
             <Link to="/home" className="block leading-3 w-1/3">
               <div className="font-black text-2xl ">Trellix</div>
               <div className="text-muted-foreground">a Remix Demo</div>
@@ -39,7 +39,7 @@ export default function App() {
                   <button className="block text-center">
                     <LogoutIcon />
                     <br />
-                    <span className="text-slate-500 text-xs uppercase font-bold">
+                    <span className="text-muted-foreground text-xs uppercase font-bold">
                       Log out
                     </span>
                   </button>
@@ -48,7 +48,7 @@ export default function App() {
                 <Link to="/login" className="block text-center">
                   <LoginIcon />
                   <br />
-                  <span className="text-slate-500 text-xs uppercase font-bold">
+                  <span className="text-muted-foreground text-xs uppercase font-bold">
                     Log in
                   </span>
                 </Link>

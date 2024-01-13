@@ -33,7 +33,7 @@ export function LoginIcon() {
 
 export function LogoutIcon() {
   return (
-    <svg className="inline self-center w-8 h-8 text-white">
+    <svg className="inline self-center w-8 h-8 text-primary">
       <use href={`${iconsHref}#logout`} />
     </svg>
   )
