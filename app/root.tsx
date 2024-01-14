@@ -34,7 +34,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="">
+      <body className="dark">
         <div className="h-full flex flex-col min-h-0">
           <div className="bg-muted border-b border-border-800 flex items-center justify-between py-4 px-8 box-border">
             <Link to="/home" className="block leading-3 w-1/3">

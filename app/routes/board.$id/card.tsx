@@ -79,14 +79,14 @@ export function Card({
       className={
         'border-t-2 border-b-2 -mb-[2px] last:mb-0 cursor-grab active:cursor-grabbing px-2 py-1 ' +
         (acceptDrop === 'top'
-          ? 'border-t-brand-red border-b-transparent'
+          ? 'border-t-destructive border-b-transparent'
           : acceptDrop === 'bottom'
-          ? 'border-b-brand-red border-t-transparent'
+          ? 'border-b-destructive border-t-transparent'
           : 'border-t-transparent border-b-transparent')
       }>
       <div
         draggable
-        className="bg-white shadow shadow-slate-300 border-slate-300 text-sm rounded-lg w-full py-1 px-2 relative"
+        className="bg-background text-sm rounded-lg w-full py-1 px-2 relative"
         onDragStart={(event) => {
           event.dataTransfer.effectAllowed = 'move'
           event.dataTransfer.setData(
@@ -100,8 +100,7 @@ export function Card({
           <input type="hidden" name="intent" value={INTENTS.deleteCard} />
           <input type="hidden" name="itemId" value={id} />
           <button
-            aria-label="Delete card"
-            className="absolute top-4 right-4 hover:text-brand-red"
+            className="absolute top-4 right-4 hover:text-destructive"
             type="submit"
             onClick={(event) => {
               event.stopPropagation()
