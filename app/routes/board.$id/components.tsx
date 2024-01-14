@@ -1,6 +1,8 @@
 import {useFetcher} from '@remix-run/react'
 import React, {forwardRef, useRef, useState} from 'react'
 import {flushSync} from 'react-dom'
+import {Button} from '~/components/ui/button'
+import {Input} from '~/components/ui/input'
 
 export const SaveButton = forwardRef<
   HTMLButtonElement,
@@ -25,12 +27,12 @@ export const CancelButton = forwardRef<
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >((props, ref) => {
   return (
-    <button
+    <Button
       ref={ref}
       type="button"
       tabIndex={0}
       {...props}
-      className="text-sm rounded-lg text-left p-2 font-medium hover:bg-slate-200 focus:bg-slate-200"
+      className="text-sm rounded-lg text-left p-2 font-medium "
     />
   )
 })
@@ -70,7 +72,7 @@ export function EditableText({
         buttonRef.current?.focus()
       }}>
       {children}
-      <input
+      <Input
         required
         ref={inputRef}
         type="text"
@@ -98,7 +100,7 @@ export function EditableText({
       />
     </fetcher.Form>
   ) : (
-    <button
+    <Button
       aria-label={buttonLabel}
       type="button"
       ref={buttonRef}
@@ -109,7 +111,7 @@ export function EditableText({
         inputRef.current?.select()
       }}
       className={buttonClassName}>
-      {value || <span className="text-slate-400 italic">Edit</span>}
-    </button>
+      {value || <span className="italic">Edit</span>}
+    </Button>
   )
 }
